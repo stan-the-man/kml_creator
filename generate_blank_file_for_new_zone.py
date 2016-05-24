@@ -9,12 +9,15 @@ from email_attach import email_myself
 
 new_kml_file = "new_kml_doc.kml"
 outf = open(new_kml_file, 'w')
-id_file = open('ids_for_new_file.txt', 'r')
+info_file = open('ids_for_new_file.txt', 'r')
 
 new_kml = kml.header("Somnoi") + kml.boundary_style() + kml.overall_folder_start("Somnoi")
 
-for id in id_file:
-    new_kml += kml.folder_no_pin(id.strip())
+# info comes id,longitude,latitude in the file
+info = [tuple(line.split(',')) for line in info_file]
+
+for id, lon, lat, in info:
+    new_kml += kml.folder_with_pin(lon, lat.strip(), id)
 new_kml += kml.overall_folder_close()
 
 
