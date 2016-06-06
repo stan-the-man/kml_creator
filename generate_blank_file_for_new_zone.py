@@ -16,7 +16,7 @@ info_file = open('id_lon_lat.txt', 'r')
 agency_name = "San Jose Water"
 new_kml = kml.header(agency_name) + kml.meter_style() + kml.boundary_style() + kml.overall_folder_start(agency_name)
 
-# info comes id,latitude,longitude in the file
+# info comes id,latitude,longitude,service point, service address, water use in CCF in the file
 info = [tuple(line.split(',')) for line in info_file]
 
 sites = {}
@@ -27,6 +27,7 @@ for id, lat, lon, service_num, service_addr, water_use in info:
     sites[id].append((lon, lat, service_num, service_addr, water_use))
 
 for id, meter in sites.iteritems():
+    service_id = prefix + 
     new_kml += kml.folder_in_folder_start(id)
     new_kml += kml.boundary_poly()
     for lon, lat, service_num, service_addr, water_use in meter:
