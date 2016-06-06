@@ -1,4 +1,5 @@
 .DS_Store
 email_attach.py
+id_lon_lat.txt
 *.pyc
 *.kml
